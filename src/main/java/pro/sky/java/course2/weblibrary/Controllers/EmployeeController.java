@@ -1,9 +1,13 @@
-package pro.sky.java.course2.weblibrary;
+package pro.sky.java.course2.weblibrary.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.java.course2.weblibrary.Data.Employee;
+import pro.sky.java.course2.weblibrary.Sevices.Impl.EmployeeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -14,7 +18,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/hallo")
+    @GetMapping("/hello")
     public String welcome() {
         return "Добро пожаловать в БД сотрудников!";
     }
@@ -23,7 +27,6 @@ public class EmployeeController {
     public Employee add(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
         Employee result;
         result = employeeService.addEmployee(sf, sl);
-
         return result;
     }
 
@@ -31,7 +34,6 @@ public class EmployeeController {
     public Employee remove(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
         Employee result;
         result = employeeService.removeEmployee(sf, sl);
-
         return result;
     }
 
@@ -39,9 +41,14 @@ public class EmployeeController {
     public Employee find(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
         Employee result;
         result = employeeService.findEmployee(sf, sl);
-
         return result;
     }
 
+    @GetMapping("/showall")
+    public List<Employee> showall() {
+        List<Employee> result;
+        result = employeeService.showEmployee();
+        return result;
+    }
 
 }

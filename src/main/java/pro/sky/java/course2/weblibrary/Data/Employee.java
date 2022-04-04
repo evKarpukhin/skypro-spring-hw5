@@ -1,4 +1,4 @@
-package pro.sky.java.course2.weblibrary;
+package pro.sky.java.course2.weblibrary.Data;
 
 import java.util.Objects;
 

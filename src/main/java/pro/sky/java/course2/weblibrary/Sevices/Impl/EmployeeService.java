@@ -1,4 +1,8 @@
-package pro.sky.java.course2.weblibrary;
+package pro.sky.java.course2.weblibrary.Sevices.Impl;
+
+import pro.sky.java.course2.weblibrary.Data.Employee;
+
+import java.util.List;
 
 public interface EmployeeService {
     Employee addEmployee(String firstName, String lastNam);
@@ -6,5 +10,7 @@ public interface EmployeeService {
     Employee removeEmployee(String firstName, String lastNam);
 
     Employee findEmployee(String firstName, String lastNam);
+
+    List<Employee> showEmployee();
 
 }
