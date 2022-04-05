@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.weblibrary.Data.Employee;
 import pro.sky.java.course2.weblibrary.Sevices.Impl.EmployeeService;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -24,29 +24,35 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee add(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
+    public Employee add(@RequestParam(value = "firstName") String sf,
+                        @RequestParam(value = "lastName") String sl,
+                        @RequestParam(value = "passNum") String passNum) {
         Employee result;
-        result = employeeService.addEmployee(sf, sl);
+        result = employeeService.addEmployee(sf, sl, passNum);
         return result;
     }
 
     @GetMapping("/remove")
-    public Employee remove(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
+    public Employee remove(@RequestParam(value = "firstName") String sf,
+                           @RequestParam(value = "lastName") String sl,
+                           @RequestParam(value = "passNum") String passNum) {
         Employee result;
-        result = employeeService.removeEmployee(sf, sl);
+        result = employeeService.removeEmployee(sf, sl, passNum);
         return result;
     }
 
     @GetMapping("/find")
-    public Employee find(@RequestParam(value = "firstName") String sf, @RequestParam(value = "lastName") String sl) {
+    public Employee find(@RequestParam(value = "firstName") String sf,
+                         @RequestParam(value = "lastName") String sl,
+                         @RequestParam(value = "passNum") String passNum) {
         Employee result;
-        result = employeeService.findEmployee(sf, sl);
+        result = employeeService.findEmployee(sf, sl, passNum);
         return result;
     }
 
     @GetMapping("/showall")
-    public List<Employee> showall() {
-        List<Employee> result;
+    public Map<Employee, String> showall() {
+        Map<Employee, String> result;
         result = employeeService.showEmployee();
         return result;
     }
