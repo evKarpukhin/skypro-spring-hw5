@@ -12,6 +12,6 @@ public interface EmployeeService {
 
     Employee findEmployee(String firstName, String lastNam, String passNum);
 
-    Map<Employee, String> showEmployee();
+    Map<String, Employee> showEmployee();
 
 }

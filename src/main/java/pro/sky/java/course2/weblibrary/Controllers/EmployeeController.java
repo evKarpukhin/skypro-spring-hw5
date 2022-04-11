@@ -51,8 +51,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/showall")
-    public Map<Employee, String> showall() {
-        Map<Employee, String> result;
+    public Map<String, Employee> showall() {
+        Map<String, Employee> result;
         result = employeeService.showEmployee();
         return result;
     }

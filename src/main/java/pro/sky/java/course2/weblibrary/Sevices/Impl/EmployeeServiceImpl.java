@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final Map<Employee, String> employees = new HashMap<>(5, 0.75f);
+    private final Map<String, Employee> employees = new HashMap<>(5, 0.75f);
 
     private boolean isNotValue(String a, String b, String c) {
         return (a.isEmpty() || b.isEmpty() || c.isEmpty() );
@@ -22,12 +22,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new BadEmployeeException();
         }
 
-        Employee employee = new Employee(firstName, lastName, passNum);
-        if (employees.containsKey(employee)) {
+        Employee employee = new Employee(firstName, firstName, passNum);
+        if (employees.containsKey(firstName+firstName)) {
             throw new BadEmployeeException();
         }
 
-        employees.put(employee, passNum);
+        employees.put(firstName+lastName, employee);
         System.out.println("Сотрудник " + employee.getFirstName() + " " + employee.getLastName() + " " + employee.getPassNum() + " добавлен.");
         return employee;
     }
@@ -39,8 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee employee = new Employee(firstName, lastName, passNum);
-        if (employees.containsKey((employee))) {
-            employees.remove(employee);
+        if (employees.containsKey((firstName+lastName))) {
+            employees.remove(firstName+lastName);
             System.out.println("Сотрудник " + employee.getFirstName() + " " + employee.getLastName() + " " + employee.getPassNum() + " удален.");
             return employee;
         }
@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee employee = new Employee(firstName, lastName, passNum);
-        if (employees.containsKey(employee)) {
+        if (employees.containsKey(firstName+lastName)) {
             System.out.println("Сотрудник " + employee.getFirstName() + " " + employee.getLastName() + " " + employee.getPassNum() + " найден.");
             return employee;
         }
@@ -62,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<Employee, String> showEmployee() {
+    public Map<String, Employee> showEmployee() {
         return employees;
     }
 
