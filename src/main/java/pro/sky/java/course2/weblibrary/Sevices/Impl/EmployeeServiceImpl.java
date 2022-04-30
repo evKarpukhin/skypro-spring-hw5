@@ -7,14 +7,17 @@ import pro.sky.java.course2.weblibrary.Exceptions.BadEmployeeException;
 import pro.sky.java.course2.weblibrary.Exceptions.NotFindEmployeeException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String, Employee> employees = new HashMap<>(10, 0.75f);
 
     private boolean checkValues(String a, String b) {
-        return !( StringUtils.isAlpha(a) && StringUtils.isAlpha(b) );
+        return !(StringUtils.isAlpha(a) && StringUtils.isAlpha(b));
+    }
+
+    public Map<String, Employee> getEmployees() {
+        return employees;
     }
 
     @Override
@@ -74,45 +77,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Map<String, Employee> showEmployee() {
         return employees;
-    }
-
-    @Override
-    public Employee findMaxSalary(int departmentId) {
-        Optional<Employee> emp;
-        emp = employees.values().stream()
-                .filter(e -> e.getDepartment() == departmentId)
-                .max(Comparator.comparingInt(Employee::getSalary));
-        return emp.orElseThrow(() -> new RuntimeException("Не найден сотрудник с максимальной З/п для отдела " + departmentId + " !"));
-    }
-
-    @Override
-    public Employee findMinSalary(int departmentId) {
-        Optional<Employee> emp;
-        emp = employees.values().stream()
-                .filter(e -> e.getDepartment() == departmentId)
-                .min(Comparator.comparingInt(Employee::getSalary));
-        return emp.orElseThrow(() -> new RuntimeException("Не найден сотрудник с минимальной З/п для отдела " + departmentId + " !"));
-    }
-
-    @Override
-    public List<Employee> findAll(int departmentId) {
-        return employees.values().stream()
-                .filter(e -> e.getDepartment() == departmentId)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Employee> findAllEmployee() {
-        List<Employee> result = new ArrayList<>();
-        Set<Integer> depList = employees.values().stream()
-                .map(Employee::getDepartment)
-                .sorted()
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-
-        for (Integer dep : depList) {
-            result.addAll(findAll(dep));
-        }
-        return result;
     }
 
 }

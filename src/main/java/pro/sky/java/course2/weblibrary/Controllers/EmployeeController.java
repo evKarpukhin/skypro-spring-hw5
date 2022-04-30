@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.weblibrary.Data.Employee;
+import pro.sky.java.course2.weblibrary.Sevices.Impl.DepartmentService;
 import pro.sky.java.course2.weblibrary.Sevices.Impl.EmployeeService;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.Map;
 @RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService) {
         this.employeeService = employeeService;
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/hello")
@@ -58,7 +61,7 @@ public class EmployeeController {
     @GetMapping("/departments/max-salary")
     public Employee findMaxSalaryInDepartment(@RequestParam(value = "departmentId") int departmentId) {
         Employee result;
-        result = employeeService.findMaxSalary(departmentId);
+        result = departmentService.findMaxSalary(departmentId);
         return result;
     }
 
@@ -66,7 +69,7 @@ public class EmployeeController {
     @GetMapping("/departments/min-salary")
     public Employee findMinSalaryInDepartment(@RequestParam(value = "departmentId") int departmentId) {
         Employee result;
-        result = employeeService.findMinSalary(departmentId);
+        result = departmentService.findMinSalary(departmentId);
         return result;
     }
 
@@ -74,7 +77,7 @@ public class EmployeeController {
     @GetMapping("/departments/all")
     public List<Employee> findAllInDepartment(@RequestParam(value = "departmentId") int departmentId) {
         List<Employee> result;
-        result = employeeService.findAll(departmentId);
+        result = departmentService.findAll(departmentId);
         return result;
     }
 
@@ -82,7 +85,7 @@ public class EmployeeController {
     @GetMapping("/departments/alls")
     public List<Employee> findAll() {
         List<Employee> result;
-        result = employeeService.findAllEmployee();
+        result = departmentService.findAllEmployee();
         return result;
     }
 
