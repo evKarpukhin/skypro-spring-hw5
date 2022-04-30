@@ -2,15 +2,15 @@ package pro.sky.java.course2.weblibrary.Sevices.Impl;
 
 import pro.sky.java.course2.weblibrary.Data.Employee;
 
-import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
-    Employee addEmployee(String firstName, String lastNam);
+    Employee addEmployee(String firstName, String lastNam, int department, int salary);
 
-    Employee removeEmployee(String firstName, String lastNam);
+    Employee removeEmployee(String firstName, String lastNam, int department, int salary);
 
-    Employee findEmployee(String firstName, String lastNam);
+    Employee findEmployee(String firstName, String lastNam, int department, int salary);
 
-    List<Employee> showEmployee();
+    Map<String, Employee> showEmployee();
 
 }
